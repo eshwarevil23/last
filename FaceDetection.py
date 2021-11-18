@@ -1,4 +1,4 @@
-import os
+import os, shutil
 import sqlite3
 import pickle
 import face_recognition
@@ -9,7 +9,7 @@ import sys
 # ALL REQUIRED PATHS
 db_path = "/home/eshwar/Desktop/mihir/last/Faces.db"
 pickle_file = "/home/eshwar/Desktop/mihir/last/Encodings1.pickle"
-
+wmaskpath = "/home/eshwar/Desktop/last/without_mask"
 
 
 sqlite_connection = sqlite3.connect(db_path)
@@ -65,3 +65,13 @@ for eachImage in os.listdir(sys.argv[1]):
 sqlite_connection.commit()
 db.close()
 sqlite_connection.close()
+
+for filename in os.listdir({wmaskpath}):
+    file_path = os.path.join(wmaskpath, filename)
+    try:
+        if os.path.isfile(file_path) or os.path.islink(file_path):
+            os.unlink(file_path)
+        elif os.path.isdir(file_path):
+            shutil.rmtree(file_path)
+    except Exception as e:
+        print('Failed to delete %s. Reason: %s' % (file_path, e))
