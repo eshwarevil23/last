@@ -9,8 +9,6 @@ import sys
 # ALL REQUIRED PATHS
 db_path = "/home/eshwar/Desktop/mihir/last/Faces.db"
 pickle_file = "/home/eshwar/Desktop/mihir/last/Encodings1.pickle"
-wmaskpath = "/home/eshwar/Desktop/last/without_mask"
-
 
 sqlite_connection = sqlite3.connect(db_path)
 db = sqlite_connection.cursor()
@@ -66,8 +64,8 @@ sqlite_connection.commit()
 db.close()
 sqlite_connection.close()
 
-for filename in os.listdir({wmaskpath}):
-    file_path = os.path.join(wmaskpath, filename)
+for filename in os.listdir({os.listdir(sys.argv[1])}):
+    file_path = os.path.join(os.listdir(sys.argv[1]), filename)
     try:
         if os.path.isfile(file_path) or os.path.islink(file_path):
             os.unlink(file_path)

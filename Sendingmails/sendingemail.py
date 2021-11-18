@@ -24,7 +24,7 @@ sender_email = "maskprojectatvce@gmail.com"
 email_html = open(f'{html_path}')
 email_body = email_html.read()
 context = ssl.create_default_context()
-server = smtplib.SMTP('smtp.gmail.com',25)
+server = smtplib.SMTP('smtp.gmail.com',587)
 server.starttls(context=context)
 server.login(sender_email,password)
 # send_mail function
