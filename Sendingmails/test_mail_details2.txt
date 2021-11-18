@@ -1,0 +1,2 @@
+mail = "maskprojectatvce@gmail.com"
+password = ""
